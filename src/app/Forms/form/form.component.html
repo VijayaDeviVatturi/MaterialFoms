@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="card-body">
+    <div class="formstyle">
+<form class="example-form" #submitForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <mat-form-field class="example-full-width">
+    <mat-label>Enter User Name</mat-label>
+    <input type="text" matInput formControlName="usernameControl" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="formControl.usernameControl.errors?.specialChar && !formControl.usernameControl.errors?.required">
+      {{formControl.usernameControl.errors['specialChar']}}
+    </mat-error>
+    <mat-error *ngIf="formControl.usernameControl.errors?.required">
+      User name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Enter Email</mat-label>
+    <input type="email" matInput formControlName="emailFormControl" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="formControl.emailFormControl.errors?.email && !formControl.emailFormControl.errors?.required">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="formControl.emailFormControl.errors?.required">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Enter Password</mat-label>
+    <input type="password" matInput formControlName="passwordControl" [errorStateMatcher]="matcher">
+    
+    <mat-error *ngIf="formControl.passwordControl.errors?.passwordStrength && !formControl.passwordControl.errors?.required">
+      {{formControl.passwordControl.errors['passwordStrength']}}
+    </mat-error>
+    <mat-error *ngIf="formControl.passwordControl.errors?.required">
+      Password is <strong>required</strong>
+    </mat-error>
+    
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [max]="maxDate" formControlName="dob" [matDatepicker]="picker" disabled >
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker disabled="false"></mat-datepicker>
+    <mat-hint>Choose a date</mat-hint>
+    <mat-error *ngIf=" formControl.dob.errors?.matDatepickerMax && !formControl.dob.errors?.required" >
+      Valid DOB <strong>required</strong>
+      
+      </mat-error>
+    <mat-error *ngIf="formControl.dob.errors?.required" >
+    DOB <strong>required</strong>
+    
+    </mat-error>
+       
+  </mat-form-field>
+  <div class="example-button-row" *ngIf="showMsg">
+    <strong>Registration Success!</strong> Please click here to login!.
+    
+  </div>
+  <button type="submit"  [disabled]="!form.valid">Submit</button>
+
+
+
+  
+</form>
+
+</div>
+</div>
+</div>
